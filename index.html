@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>POST/GET tester</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <script src="../jquery-3.3.1.min.js"></script>
+
+        <style>
+            html {
+            height: 100%;
+            width: 100%;
+            }
+            body {
+            height: 97%;
+            width: 97%;
+            margin: 1%;
+            }
+            #all {
+            display: flex;
+            flex-flow: column;
+            height: 100%;
+            width: 100%
+            }
+
+            iframe {
+                flex-grow : 1;
+            }
+        
+        </style>
+    </head>
+    <body>
+        <div id="all">
+        <div id="setting">
+            <h1>POST/GET tester</h1>
+            <p>url:<input id='url' size="100"></p>
+
+            <p>method:
+                <input type="radio" name="method" value="POST" checked>POST
+                <input type="radio" name="method" value="GET">GET
+            </p>
+
+            <p></p>
+            <form id="myForm" target="result">
+                <table>
+                    <thead>content:</thead>
+                    <tr>
+                        <th>name</th>
+                        <th>value</th>
+                    </tr>
+                    <tr id=>
+                        <th><input id='name0' type="text"></th>
+                        <th><input id='0' class="content" type="text"></th>
+                    </tr>
+                    <tr>
+                        <th><input id='name1' type="text"></th>
+                        <th><input id='1' class="content" type="text"></th>
+                    </tr>
+                    <tr>
+                        <td><input id='name2' type="text"></td>
+                        <td><input id='2' class="content" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input id='name3' type="text"></td>
+                        <td><input id='3' class="content" type="text"></td>
+                    </tr>
+                </table>
+                <input type="submit"/>
+                <input type="reset"/>
+            </form>
+            <button onclick="add()">add</button>
+            <br>
+            <br>
+            <br>
+            result:
+            <br>
+        </div>
+        <iframe name="result" width="100%"></iframe>
+    </div>
+        <script>
+            var contentCount = 4;
+            $('#myForm').submit(function() {
+                $('#myForm').attr('method', $("input[name='method']:checked").val());
+                $('#myForm').attr('action', $('#url').val());
+
+                for (i = 0; i < contentCount; i++) { 
+                    $('#'+i).attr('name', $('#name'+i).val());
+                }
+                
+                //return false;
+                
+            });
+            function add()
+            {
+                $('table').html(function(i, origText){
+            return origText + 
+                    "<tr><td><input id='name"+
+                    contentCount+"'></td><td><input id='"
+                    +contentCount+"' class='content'></td></tr>";
+                });
+                contentCount++;
+            }
+        
+        </script>
+    </body>
+</html>
