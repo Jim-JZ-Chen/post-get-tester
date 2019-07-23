@@ -69,10 +69,6 @@
                         <td><input id='name2' type="text"></td>
                         <td><input id='2' class="content" type="text"></td>
                     </tr>
-                    <tr>
-                        <td><input id='name3' type="text"></td>
-                        <td><input id='3' class="content" type="text"></td>
-                    </tr>
                 </table>
                 <input type="submit"/>
                 <input type="reset"/>
@@ -84,27 +80,37 @@
             result:  <a id='result'></a>
             <br>
         </div>
-        <iframe name="result" width="100%"></iframe>
+        <iframe id='resultFrame' name="result" width="100%"></iframe>
     </div>
         <script>
-            var contentCount = 4;
+            var contentCount = 3;
             $('#myForm').submit(function() {
                 
-                $('#myForm').attr('method', $("input[name='method']:checked").val());
-                $('#myForm').attr('action', $('#http').find(":selected").text() + $('#url').val());
-                $('#result').text($('#myForm').attr('action'));
-                $('#result').attr('href', $('#myForm').attr('action'));
+                var form = $('#myForm');
+                var method = $("input[name='method']:checked").val();
+                form.attr('method', method);
+                form.attr('action', $('#http').find(":selected").text() + $('#url').val());
+
                 for (i = 0; i < contentCount; i++) { 
                     $('#'+i).attr('name', $('#name'+i).val());
                 }
                 
+                var url = form.attr('action');
+                if(method === 'GET')
+                {
+                    url +="?" + form.serialize();
+                }
+
+                $('#result').text(url);
+                $('#result').attr('href', url);
                 //return false;
                 
             });
+            
             function add()
             {
                 $('table').html(function(i, origText){
-            return origText + 
+                return origText + 
                     "<tr><td><input id='name"+
                     contentCount+"'></td><td><input id='"
                     +contentCount+"' class='content'></td></tr>";
