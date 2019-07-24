@@ -1,5 +1,5 @@
 # post-get-tester
-a easy way to test post and get online
+a easy way to test **POST** and **GET** online
 https://jim-jz-chen.github.io/post-get-tester/
 
 
@@ -13,7 +13,7 @@ https://jim-jz-chen.github.io/post-get-tester/
 
 ## support
 1. http/https
-2. post/get
+2. POST/GET
 3. customize name of variables
 4. unlimited variables
 6. auto-generated GET url 
